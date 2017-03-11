@@ -1,0 +1,32 @@
+<div class="ui inverted menu">
+  <a class="green item" href="<%= root_path %>" id="top_item_1">
+    Home
+  </a>
+  <a class="green item">
+    Messages
+  </a>
+  <a class="green item">
+    Friends
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui transparent icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  checkActiveItem()
+
+  function checkActiveItem() {
+    var location = window.location.href;
+
+    if (location.match('/')) {
+      $("#top_item_1").addClass('active')
+    }
+    console.log("Change items corlor")
+  };
+</script>
