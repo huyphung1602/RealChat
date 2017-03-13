@@ -4,7 +4,7 @@
   <%= render @messages %>
 </div>
 
-<%= form_for [@room, Message.new(username: current_user)] do |f| %>
+<%= form_for [@room, Message.new(username: current_user)], remote: true do |f| %>
   <div class="ui form">
     <div class="field">
       <%= f.label "Message" %>
@@ -22,6 +22,12 @@
   function reload() {
     $.get("<%=  room_messages_path(@room, format: :js) %>", function(response) {
       console.log("Reload successfully", response)
+    })
+  }
+
+  function reloadJSON() {
+    $.getJSON("<%=  room_messages_path(@room, format: :json) %>", function(response) {
+      console.log("Data: ", response)
     })
   }
 
