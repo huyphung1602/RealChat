@@ -1,0 +1,29 @@
+<h1>Room <%= @room.name %></h1>
+
+<div class="messages ui items">
+  <%= render @messages %>
+</div>
+
+<%= form_for [@room, Message.new(username: current_user)] do |f| %>
+  <div class="ui form">
+    <div class="field">
+      <%= f.label "Message" %>
+      <%= f.text_field :body, placeholder: "Your message", required: true %>
+    </div>
+    <div class="field">
+      <%= f.label :username %>
+      <%= f.text_field :username, placeholder: "Your name", required: true %>
+    </div>
+    <%= f.submit nil, class: "ui green button" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  function reload() {
+    $.get("<%=  room_messages_path(@room, format: :js) %>", function(response) {
+      console.log("Reload successfully", response)
+    })
+  }
+
+  setInterval(reload, 3000);
+</script>

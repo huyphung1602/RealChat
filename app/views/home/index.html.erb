@@ -1,1 +1,42 @@
 <h1>Welcome to RealChat</h1>
+<p>Choose your room:</p>
+
+<ul>
+  <% @rooms.each do |room| %>
+    <div class="ui grid">
+      <div class="six wide column">
+        <li>
+          <strong><%= room.name %></strong>
+          <%= link_to "Join", room_path(room),
+              class: 'ui mini right floated blue button' %>
+        </li>
+      </div>
+    </div>
+  <% end %>
+</ul>
+
+<div class="ui grid">
+  <div class="eight wide column">
+    <%= form_for @room do |f| %>
+      <div class="ui form">
+        <div class="field">
+          <%= f.label "Room name" %>
+          <%= f.text_field :name, placeholder: "Your room name" %>
+        </div>
+
+      <%= f.fields_for :messages do |field| %>
+        <div class="field">
+          <%= field.label "Your name and first message" %>
+          <%= field.text_field :username, placeholder: "Your name" %>
+        </div>
+
+        <div class="field">
+          <%= field.text_field :body, placeholder: "Your first message" %>
+        </div>
+      <% end %>
+        
+      <%= f.submit nil, class: "ui green button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
